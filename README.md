@@ -1,5 +1,7 @@
 # Doppelt robust und Double ML – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-doppelt-robust-demo.streamlit.app/)**
+
 Siebtes Stück der Linie **Kausale Diagramme und Adjustierung** in der „Konzepte“-Reihe im Portfolio von [Sebastian Hanisch](https://sebastianhanisch.net) (Operations Research und Machine Learning). Nachfolger von [schaetzen-demo](https://github.com/sebastian-hanisch/schaetzen-demo): Dort stand, dass jeder Einzelschätzer ein zweites Modell braucht. Hier steht der Schätzer, der beide Modelle kombiniert und nur eines davon richtig braucht, und die Kreuzanpassung, die erlaubt, beide mit einem flexiblen Lernverfahren zu schätzen.
 
 ## Kernfrage
@@ -91,4 +93,4 @@ Streamlit Cloud: Python 3.12.
 
 Gebaut mit Streamlit, Plotly, numpy, pandas, scikit-learn und fpdf2.
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html).
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Kausale Diagramme: von Konfundierung bis Wahl](https://sebastianhanisch.net/konzepte-kausale-diagramme.html).
