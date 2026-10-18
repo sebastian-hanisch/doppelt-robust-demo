@@ -227,7 +227,7 @@ def verdict_double_robust(res: dict) -> tuple[str, str]:
     out_right = c["Ergebnis richtig, Zuteilung falsch"]["aipw"]
     ps_right = c["Ergebnis falsch, Zuteilung richtig"]["aipw"]
     return "info", (f"Sind beide Modelle falsch, liegt der AIPW um {signed(both_wrong['bias'])} daneben (Deckung {de(100 * both_wrong['cover'], 0)} %). Ist nur das Ergebnismodell "
-                    f"richtig, trifft er ({signed(out_right['bias'], 3)}); ist nur die Zuteilung richtig, bleibt bei n = {res['n']} eine Restverzerrung von {signed(ps_right['bias'])}.")
+                    f"richtig, trifft er ({signed(out_right['bias'], 3)}); ist nur die Zuteilung richtig, bleibt bei n = {res['n']} eine Restverzerrung von {signed(ps_right['bias'])}, vor allem durch die Kappung der Zuteilung auf [0,005; 0,995] (eine kleinere Schranke senkt die Verzerrung und erhöht die Streuung).")
 
 
 def verdict_orthogonality(res: dict) -> tuple[str, str]:
