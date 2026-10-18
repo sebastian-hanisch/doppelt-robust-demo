@@ -99,9 +99,9 @@ with st.expander("So liest man die Schätzer", expanded=True):
 1. **Plug-in.** Das Ergebnismodell sagt für jeden Standort voraus, was mit und ohne Regel B herauskäme; man mittelt die Differenz. Jeder Fehler des Modells geht **ungedämpft** ein.
 2. **Gewichten.** Jede Einheit zählt mit dem Kehrwert ihrer Zuteilungswahrscheinlichkeit. Jeder Fehler des Zuteilungsmodells geht ungedämpft ein.
 3. **AIPW (doppelt robust).** Plug-in plus eine gewichtete Korrektur mit den Resten des Ergebnismodells. Die Fehler der beiden Modelle gehen als **Produkt** ein: Ist eines richtig,
-   verschwindet der Fehler; sind beide klein, ist das Produkt sehr klein.
-4. **Kreuzanpassung.** Die Störfunktionen jeder Beobachtung kommen aus einem Modell, das sie nicht gesehen hat. Ohne sie nutzt das Lernverfahren dieselben Daten zweimal und das
-   Intervall lügt.
+   verschwindet der Fehler (asymptotisch; bei endlichem n kann ein Rest bleiben); sind beide klein, ist das Produkt sehr klein.
+4. **Kreuzanpassung.** Die Störfunktionen jeder Beobachtung kommen aus einem Modell, das sie nicht gesehen hat. Ohne sie nutzt das Lernverfahren dieselben Daten zweimal, und bei flexiblen
+   Lernverfahren (Wald) ist das Intervall dann deutlich zu schmal.
         """
     )
 
@@ -162,8 +162,8 @@ verdict(verdict_instance(a))
 st.dataframe(style_estimates_table(build_estimates_table(a)), hide_index=True, width="stretch")
 st.markdown("**Fehler der Störfunktionen gegen die wahren** (Wurzel des mittleren quadratischen Fehlers)")
 st.dataframe(build_nuisance_table(a), hide_index=True, width="stretch")
-st.caption("Der AIPW-Fehler hängt am **Produkt** der beiden Fehler, nicht an jedem einzeln. Kreuzangepasst sind die Fehler meist etwas größer, weil jedes Modell weniger Daten sieht; "
-           "dafür sind sie ehrlich.")
+st.caption("Der AIPW-Fehler hängt am **Produkt** der beiden Fehler, nicht an jedem einzeln. Kreuzangepasst sind die Fehler der Ergebnisfunktionen etwas größer (weniger Daten je Modell); "
+           "die Zuteilung des Waldes ist es nicht, weil der Wald in der Stichprobe überanpasst.")
 
 if st.button("📄 PDF der aktuellen Auswertung erstellen", key="pdf_make"):
     st.session_state["pdf_made"] = (settings, build_pdf(a))
@@ -228,9 +228,9 @@ st.markdown(
 | **Alle Störfaktoren sind beobachtet** | Ein verborgener Störfaktor verzerrt auch den doppelt robusten Schätzer; Kreuzanpassung ändert daran nichts. | Frontdoor, Instrumente, Sensitivität und Falsifikation |
 | **Eines der beiden Modelle stimmt oder beide sind gut genug** | Sind beide falsch oder zu schlecht gelernt, bleibt eine Restverzerrung (Experiment 1, Experiment 4 im schweren Vehikel). | Wie falsch darf das Diagramm sein? |
 | **Überlappung: die Gewichte bleiben zahm** | Bei knapper Überlappung wird die Korrektur unruhig, und der doppelt robuste Schätzer ist ungenauer als das richtige Ergebnismodell allein (Experiment 1). | Schätzen (Stück 6) |
-| **Das Lernverfahren ist gut genug** | Die Theorie verlangt, dass das Produkt der Fehler schneller als 1/√n fällt; ein Wald mit 30 Bäumen im schweren Vehikel erfüllt das nicht (Experiment 4). | nicht gebaut (Abstimmung der Lernverfahren) |
+| **Das Lernverfahren ist gut genug** | Die Theorie verlangt, dass das Produkt der Fehler schneller als 1/√n fällt; ein Wald mit 30 Bäumen im schweren Vehikel erfüllt das bei den gemessenen n (500, 1 000) nicht erkennbar (Experiment 4). | nicht gebaut (Abstimmung der Lernverfahren) |
 | **Konstante Wirkung (partiell lineares DML)** | Das Robinson-Verfahren schätzt dann eine gewichtete Wirkung; die Demo hat nur eine konstante. | Heterogene Wirkungen sind nicht gebaut |
-| **n ist groß genug für die Falten** | Bei kleinem n sieht jedes Modell zu wenige Daten; die Intervalle decken zu selten. | Welche Menge? (Stück 5) |
+| **n ist groß genug für die Falten** | Bei kleinem n sieht jedes Modell zu wenige Daten; die Intervalle können zu selten decken (nicht gemessen). | Welche Menge? (Stück 5) |
 """
 )
 
